@@ -55,7 +55,8 @@ def create_counters(name):
     app.logger.info("Request to Create counter: %s...", name)
 
     if name in COUNTER:
-        return abort(status.HTTP_409_CONFLICT, f"Counter {name} already exists")
+        return abort(status.HTTP_409_CONFLICT,
+                     f"Counter {name} already exists")
     COUNTER[name] = 0
 
     location_url = url_for("read_counters", name=name, _external=True)
