@@ -54,4 +54,21 @@ spec:
         set -e
         python -m pip install --upgrade pip wheel
         pip install -r requirements.txt
-        nosetests $(params.args)       
+        nosetests $(params.args)
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  namespace: sn-labs-jamesho19
+spec:
+  containers:
+  - name: test-container
+    image: nginx
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: oc-lab-pvc       
